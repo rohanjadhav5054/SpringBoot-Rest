@@ -18,6 +18,11 @@ public class JobRestController {
         return service.getAllJobs();
     }
 
+    @GetMapping("jobPosts/keyword/{keyword}")
+    public List<JobPost> searchJobByKeyword(@PathVariable("keyword") String keyword){
+        return service.search(keyword);
+    }
+
     @GetMapping("JobPost/{postId}")//using the {} we can mae it as a dynamic
     public JobPost getJob( @PathVariable("postId") int postId){
         return service.getJob(postId);
@@ -39,5 +44,11 @@ public class JobRestController {
     public String deleteJob(@PathVariable("postId") int postId){
         service.deleteJob(postId);
         return "JobDeleted Successfully";
+    }
+
+    @GetMapping("Load")
+    public String loadData(){
+        service.load();
+        return "Load Successfully";
     }
 }
